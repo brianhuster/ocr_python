@@ -8,11 +8,10 @@ import pyttsx3
 import numpy as np
 import time
 from tool.predictor import Predictor
-import pygame
 import traceback
 import os
 
-pytesseract.pytesseract.tesseract_cmd = r'F:\Tesseract-OCR\tesseract'
+pytesseract.pytesseract.tesseract_cmd = r'F:\Tesseract-OCR\tesseract' #replace it with the actual path to your tesseract file. If you are using MacOS or Linux, remove this line
 model_predictor = Predictor(device='cpu', model_type='seq2seq', weight_path='./weights/seq2seq_0.pth')
 pyttsx3_engine = pyttsx3.init()
 pyttsx3_engine.setProperty('voice', 'vietnam')
@@ -91,8 +90,8 @@ def listen_for_command():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source)
-        audio = r.listen(source)
         print("Google is listening for command...")
+        audio = r.listen(source)
     try:
         # command = r.recognize_whisper(audio, language='vietnamese')
         command = r.recognize_google(audio, language='vi-VN')
@@ -108,7 +107,6 @@ def speak_gtts(text):
     tts = gTTS(text=text, lang='vi')
     tts.save("temp.mp3")
     playsound(os.path.dirname(__file__) + "\\temp.mp3")
-    print("Bot : Đã đọc xong")
 
 def speak_pyttsx3(text):
     pyttsx3_engine.say(text)

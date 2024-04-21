@@ -1,10 +1,11 @@
 ﻿# read_text_from_camera
 Code Python đọc văn bản tiếng Việt từ video camera và chuyển thành giọng nói
-## Cài đặt bằng terminal Ubuntu
+## Cài đặt
 ```git clone https://github.com/brianhuster/read_text_from_camera/```
 
 ```cd read_text_from_camera```
-
+```pip install -r requirements.txt```
+#Ubuntu
 ```
 sudo apt-get update
 sudo apt-get install espeak
@@ -14,8 +15,6 @@ sudo apt-get install -y libgl1-mesa-glx
 sudo apt-get install tesseract-ocr-vie
 sudo apt-get install -y portaudio19-dev python3-pyaudio
 ```
-
-```pip install -r requirements.txt```
 
 ### Chạy chương trình
 ```python3 main.py```

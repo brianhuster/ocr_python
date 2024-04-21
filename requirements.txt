@@ -6,7 +6,7 @@ unicodedata2
 nltk
 opencv-python
 pytesseract
-SpeechRecognition
+SpeechRecognition==1.2.2
 gTTS
 playsound
 pyttsx3
