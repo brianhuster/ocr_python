@@ -5,7 +5,7 @@ Code Python đọc văn bản tiếng Việt từ video camera và chuyển thà
 
 ```cd read_text_from_camera```
 ```pip install -r requirements.txt```
-#Ubuntu
+### Ubuntu
 ```
 sudo apt-get update
 sudo apt-get install espeak
@@ -15,7 +15,8 @@ sudo apt-get install -y libgl1-mesa-glx
 sudo apt-get install tesseract-ocr-vie
 sudo apt-get install -y portaudio19-dev python3-pyaudio
 ```
-
+### Windows
+[https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.3.20231005.exe](Install here) and replace ```path/to/Tesseract``` in the file main.py with your actual path to Tesseract
 ### Chạy chương trình
 ```python3 main.py```
 
@@ -24,4 +25,5 @@ Người dùng ra lệnh, sau đó chương trình sẽ nghe chuyển giọng n�
 Nếu câu lệnh của người dùng chứa từ "đọc chữ" thì chương trình sẽ chụp hình từ camera rồi chuyển chữ thành văn bản trên terminal, rồi đọc to văn bản qua dịch vụ chuyển văn bản thành giọng nói của Google
 
 ## References
+[https://github.com/madmaze/pytesseract](https://github.com/madmaze/pytesseract)
 [https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection](https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection)
