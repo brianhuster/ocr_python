@@ -16,7 +16,7 @@ sudo apt-get install tesseract-ocr-vie
 sudo apt-get install -y portaudio19-dev python3-pyaudio
 ```
 ### Windows
-[https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.3.20231005.exe](Install here) and replace ```path/to/Tesseract``` in the file main.py with your actual path to Tesseract
+[https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.3.20231005.exe](Install here) and replace ```F:\Tesseract-OCR\tesseract``` in the file main.py with your actual path to Tesseract
 ### Chạy chương trình
 ```python3 main.py```
 
