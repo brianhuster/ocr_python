@@ -26,4 +26,5 @@ Nếu câu lệnh của người dùng chứa từ "đọc chữ" thì chương 
 
 ## References
 [https://github.com/madmaze/pytesseract](https://github.com/madmaze/pytesseract)
+
 [https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection](https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection)
