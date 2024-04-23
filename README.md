@@ -22,3 +22,6 @@ sudo apt-get install -y portaudio19-dev python3-pyaudio
 Người dùng ra lệnh, sau đó chương trình sẽ nghe chuyển giọng nói người dùng thành văn bản qua dịch vụ của Google và hiển thị câu lệnh trên Terminal. 
 
 Nếu câu lệnh của người dùng chứa từ "đọc chữ" thì chương trình sẽ chụp hình từ camera rồi chuyển chữ thành văn bản trên terminal, rồi đọc to văn bản qua dịch vụ chuyển văn bản thành giọng nói của Google
+
+## References
+[https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection](https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection)
