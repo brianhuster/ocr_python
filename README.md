@@ -23,7 +23,8 @@ Install Tesseract [here](https://digi.bib.uni-mannheim.de/tesseract/tesseract-oc
 Người dùng ra lệnh, sau đó chương trình sẽ nghe chuyển giọng nói người dùng thành văn bản qua dịch vụ của Google và hiển thị câu lệnh trên Terminal. 
 
 Nếu câu lệnh của người dùng chứa từ "đọc chữ" thì chương trình sẽ chụp hình từ camera rồi chuyển chữ thành văn bản trên terminal, rồi đọc to văn bản qua dịch vụ chuyển văn bản thành giọng nói của Google
-
+### Demo
+[![Demo CountPages alpha](https://i9.ytimg.com/vi/v9YPcHzfTyk/mqdefault.jpg?sqp=CNjYrrEG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgQyhCMA8=&rs=AOn4CLCxICP7zv-lwkr3xoMfB8t1JQ5alw)](https://www.youtube.com/watch?v=v9YPcHzfTyk)
 ## References
 [https://github.com/madmaze/pytesseract](https://github.com/madmaze/pytesseract)
 
