@@ -59,7 +59,6 @@ def preprocess_image(image):
 
     # Apply binarization
     _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    cv2.imshow("Binary", image)
     cv2.waitKey(0)
 
     # # Contrast enhancement
@@ -83,7 +82,6 @@ def preprocess_image(image):
 def OCR(image):
     t=time.time()
     d = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
-    print(d['text'])
     print("\nDetecting time: ", time.time()-t)
     t=time.time()
     n_boxes = len(d['text'])
