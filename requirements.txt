@@ -18,3 +18,4 @@ pyaudio
 patch-ng
 torchvision
 vietocr
+pillow
