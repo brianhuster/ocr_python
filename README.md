@@ -35,11 +35,4 @@ Khi video camera đang chạy, nhấn phím ```q``` để tắt
 
 [https://github.com/pbcquoc/vietocr](https://github.com/pbcquoc/vietocr)
 
-=======
-### Video demo
-[![Demo CountPages alpha](https://i9.ytimg.com/vi/v9YPcHzfTyk/mqdefault.jpg?sqp=CNjYrrEG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgQyhCMA8=&rs=AOn4CLCxICP7zv-lwkr3xoMfB8t1JQ5alw)](https://www.youtube.com/watch?v=v9YPcHzfTyk)
-## References
-[https://github.com/madmaze/pytesseract](https://github.com/madmaze/pytesseract)
-
->>>>>>> 55802d16397dd74f3a8793ec04fde3a3d9a6c93b
-[https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection](https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection)
+[https://github.com/pbcquoc/vietocr](https://github.com/pbcquoc/vietocr)
