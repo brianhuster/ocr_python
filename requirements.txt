@@ -19,5 +19,5 @@ patch-ng
 torchvision
 vietocr
 pillow
-os
 easyocr
+pycountry
