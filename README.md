@@ -39,7 +39,7 @@ Say "đọc chữ" or "read it" to trigger text recognition and speech synthesis
 While the camera is running, press ```q``` to turn it off
 
 ### Demo video
-[![Demo CountPages alpha](https://i9.ytimg.com/vi/v9YPcHzfTyk/mqdefault.jpg?sqp=CNjYrrEG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgQyhCMA8=&rs=AOn4CLCxICP7zv-lwkr3xoMfB8t1JQ5alw)](https://www.youtube.com/watch?v=v9YPcHzfTyk)
+[![Video](https://i9.ytimg.com/vi/v9YPcHzfTyk/mqdefault.jpg?sqp=CNjYrrEG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgQyhCMA8=&rs=AOn4CLCxICP7zv-lwkr3xoMfB8t1JQ5alw)](https://www.youtube.com/watch?v=v9YPcHzfTyk)
 
 ## References
 [https://github.com/madmaze/pytesseract](https://github.com/madmaze/pytesseract)
