@@ -14,15 +14,9 @@ import traceback
 import os
 import argparse
 import urllib.request
-
-pytesseract.pytesseract.tesseract_cmd = r'F:\Tesseract-OCR\tesseract' #replace it with the actual path to your tesseract file. If you are using MacOS or Linux, remove this line
-text_corrector = Corrector(device='cpu', model_type='seq2seq', weight_path='./weights/seq2seq_0.pth')
-config = Cfg.load_config_from_name('vgg_transformer')
-config['weights'] = 'https://huggingface.co/brianhuster/VietnameseOCR/resolve/main/vgg_transformer.pth'
-config['device'] = 'cpu'
-config['cnn']['pretrained']=False
-config['predictor']['beamsearch']=False
-OCRpredictor = Predictor(config)
+import easyocr
+import platform
+import subprocess
 
 def listen_for_command():
     global command
@@ -39,6 +33,11 @@ def listen_for_command():
         print(f"Error: {str(e)}")
         traceback.print_exc()
         return None
+
+def run_shell_command(command):
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+    output, error = process.communicate()
+    return output.decode(), error.decode()
 
 def preprocess_image(image):
     # Resize (optional)
@@ -79,7 +78,7 @@ def preprocess_image(image):
     # cv2.imwrite("Rotated.jpg", image)
     return image
 
-def OCR(image):
+def OCR1(image): # detect using tesseract
     t=time.time()
     d = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
     print("\nDetecting time: ", time.time()-t)
@@ -106,6 +105,39 @@ def OCR(image):
     print("\nRecognization time: ", time.time()-t)
     return text
 
+def OCR2(image): # detect using easyocr
+    t=time.time()
+    d=reader.readtext(image)
+    print(d)
+    print("\nDetecting time: ", time.time()-t)
+    t=time.time()
+    n_boxes = len(d)
+    if n_boxes == 0:
+        print("\nNo text detected\n")
+        return
+    text = ""
+    last_bottom=d[0][0][2][1]
+    for i in range(n_boxes):
+        if d[i][2] > 0:
+            (top, bottom, left, right) = (d[i][0][0][1], d[i][0][2][1], d[i][0][0][0], d[i][0][1][0])
+            print(top, bottom, left, right)
+            cut = image[int(top):int(bottom), int(left):int(right)]
+            cut = preprocess_image(cut)
+            cv2.waitKey(0)
+            cut_text = OCRpredictor.predict(img = Image.fromarray(cut))
+            if top>last_bottom:
+                text += "\n"
+            last_bottom = bottom
+            text += cut_text + " "
+    print("\nRecognization time: ", time.time()-t)
+    return text
+
+def OCR(image):
+    if detector == 'easyocr':
+        return OCR2(image)
+    elif detector == 'tesseract':
+        return OCR1(image)
+
 def text_correction(text):
     try:
         print("\nRecognized text: ", text)
@@ -124,13 +156,36 @@ def speak_gtts(text):
     playsound("temp.mp3")
     os.remove("temp.mp3")
 
-parser = argparse.ArgumentParser(description='Read text from an image or camera. You can only provide either --ImagePath or --CameraSource, not both')
+parser = argparse.ArgumentParser(description='Read text from an image or camera. You can not provide both --ImagePath and --CameraSource at the same time.')
 parser.add_argument('-i', '--ImagePath', type=str, help='Path to an image')
 parser.add_argument('-c', '--CameraSource', type=str, help='Index or URL of the camera to use. Default is 0')
+if platform.system() != 'Windows':
+    parser.add_argument('-d', '--detector', type=str, default='easyocr', help='Detector to use, "tesseract" or "easyocr". Default is "easyocr"')
 args = parser.parse_args()
 
+if platform.system() == 'Windows' or args.detector == 'easyocr':
+    reader = easyocr.Reader(['vi','en'])
+    detector='easyocr'
+else:
+    detector='tesseract'
+    reader=None
+    print("\nCHECKING AND INSTALLING TESSERACT (if not found)\n")
+    if platform.system() == 'Linux':
+        run_shell_command("sudo apt-get install tesseract-ocr-vie")
+        run_shell_command("sudo apt-get install tesseract-ocr-script-viet")
+    elif platform.system() == 'Darwin':
+        run_shell_command("sudo port install tesseract-vie")
+
+text_corrector = Corrector(device='cpu', model_type='seq2seq', weight_path='./weights/seq2seq_0.pth')
+config = Cfg.load_config_from_name('vgg_transformer')
+config['weights'] = 'https://huggingface.co/brianhuster/VietnameseOCR/resolve/main/vgg_transformer.pth'
+config['device'] = 'cpu'
+config['cnn']['pretrained']=False
+config['predictor']['beamsearch']=False
+OCRpredictor = Predictor(config)
+
 if args.ImagePath is not None and args.CameraSource is not None:
-    parser.error('You can only provide either --ImagePath or --CameraSource, not both')
+    parser.error('You can not provide both --ImagePath and --CameraSource at the same time.')
 if args.ImagePath is None and args.CameraSource is None:
     args.CameraSource = '0'
 

@@ -20,4 +20,4 @@ torchvision
 vietocr
 pillow
 os
-argparse
+easyocr
