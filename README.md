@@ -1,6 +1,6 @@
-﻿﻿# read_text_from_camera
-Code Python đọc văn bản tiếng Việt từ video camera và chuyển thành giọng nói
-## Cài đặt
+﻿﻿# OCR_python
+This python script can extract text from image (local or URL), and camera
+## Install
 ```shell
 git clone https://github.com/brianhuster/read_text_from_camera/
 cd read_text_from_camera
