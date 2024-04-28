@@ -30,7 +30,10 @@ def listen_for_command():
         print("\nGoogle is listening for command...\n")
         audio = r.listen(source)
     try:
-        command = r.recognize_google(audio, language='vi-VN')
+        if args.language == 'vi':
+            command = r.recognize_google(audio, language='vi-VN')
+        else:
+            command = r.recognize_google(audio, language='en-US')
         print(f"\nCommand received: {command}\n")
         return command
     except Exception as e:
@@ -108,6 +111,10 @@ def detect_easyocr(image): # detect using easyocr
             array.append((top, bottom, left, right, text))
     return array
 
+def convert_to_three_letter_code(two_letter_code):
+    language = pycountry.languages.get(alpha_2=two_letter_code)
+    return language.alpha_3
+
 def recognize(image, array):
     text=""
     last_bottom=array[0][1]
@@ -121,7 +128,7 @@ def recognize(image, array):
         elif args.recognizer == 'vietocr':
             cut_text = vietocr_predictor.predict(img = Image.fromarray(cut))
         elif args.recognizer == 'tesseract':
-            cut_text = pytesseract.image_to_string(cut, lang='vie')
+            cut_text = pytesseract.image_to_string(cut, lang=lang3)
         if box[0]>last_bottom:
             text += "\n"
         last_bottom = box[1]
@@ -163,7 +170,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Read text from image(s) or camera. Among  --ImagePath (-i), imageFolders (-f) and --CameraSource (-c), you can provide ONLY ONE option for a runtime.')
     parser.add_argument('-i', '--ImagePath', type=str, help='Local path or URL to an image')
     parser.add_argument('-f', '--imagesFolder', type=str, help='Local path to a folder containing images. This will process all images in the folder and save recognized text in txt files the same folder.')
-    parser.add_argument('-c', '--CameraSource', type=str, help='Index or URL of the video camera to use. Default is 0')
+    parser.add_argument('-c', '--CameraSource', type=str, help='Index or URL of the video camera to use. Default is 0 \nWhile the video is playing, you can press "q" to quit or say "Đọc chữ" or "Read it" to recognize text in the frame.')
     if platform.system() != 'Windows':
         parser.add_argument('-d', '--detector', type=str, default='easyocr', help='Detector to use, "tesseract" or "easyocr". Default is "easyocr"')
         parser.add_argument('-r', '--recognizer', type=str, default='easyocr', help='Recognizer to use, "easy_ocr" or "vietocr". Default is "easy_ocr"')
@@ -181,12 +188,12 @@ if __name__ == "__main__":
     if args.recognizer == 'tesseract' or args.detector == 'tesseract':
         if platform.system() == 'Windows':
             parser.error("Sorry, Tesseract is not supported on Windows")
+        lang3=convert_to_three_letter_code(args.language)
         print("\nCHECKING AND INSTALLING TESSERACT (if not found)\n")
         if platform.system() == 'Linux':
-            run_shell_command("sudo apt-get install tesseract-ocr-vie")
-            run_shell_command("sudo apt-get install tesseract-ocr-script-viet")
+            run_shell_command("sudo apt-get install tesseract-ocr-"+lang3)
         elif platform.system() == 'Darwin':
-            run_shell_command("sudo port install tesseract-vie")
+            run_shell_command("sudo port install tesseract-"+lang3)
 
     if args.recognizer == 'vietocr':
         if args.language != 'vi':
@@ -252,7 +259,7 @@ if __name__ == "__main__":
         else:
             cap = cv2.VideoCapture(args.CameraSource)
         cap.set(3, 640)
-        cap.set(4, 560)
+        cap.set(4, 480)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
         command=None
@@ -265,7 +272,7 @@ if __name__ == "__main__":
             cv2.imshow("Camera", frame)
             t=time.time()
             if command is not None:
-                if "đọc chữ" in command.lower():
+                if "đọc chữ" or "read it" in command.lower():
                     recognized_text = OCR(frame)
                     cv2.imshow("Camera", frame)
                     if recognized_text.strip():
