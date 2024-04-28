@@ -108,7 +108,6 @@ def OCR1(image): # detect using tesseract
 def OCR2(image): # detect using easyocr
     t=time.time()
     d=reader.readtext(image)
-    print(d)
     print("\nDetecting time: ", time.time()-t)
     t=time.time()
     n_boxes = len(d)
@@ -241,4 +240,3 @@ if args.CameraSource:
         
     cap.release()
     cv2.destroyAllWindows()
-
