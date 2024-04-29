@@ -13,6 +13,7 @@ python3 script.py [-h] [-i IMAGEPATH] [-c CAMERASOURCE] [-d {easyocr,tesseract}]
 ```
 
 Arguments:
+- `-h`, `--help`: For help
 - `-i IMAGEPATH`, `--ImagePath IMAGEPATH`: Local path or URL to an image
 - `-c CAMERASOURCE`, `--CameraSource CAMERASOURCE`: Index or URL of the video camera (default: 0)
 - `-d {easyocr,tesseract}`, `--detector {easyocr,tesseract}`: Detector to use (default: easyocr)
