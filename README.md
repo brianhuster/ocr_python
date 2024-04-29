@@ -46,4 +46,6 @@ While the camera is running, press ```q``` to turn it off
 
 [https://github.com/pbcquoc/vietocr](https://github.com/pbcquoc/vietocr)
 
-[https://github.com/pbcquoc/vietocr](https://github.com/pbcquoc/vietocr)
+[https://github.com/JaidedAI/EasyOCR](https://github.com/JaidedAI/EasyOCR)
+
+[https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection](https://github.com/buiquangmanhhp1999/VietnameseOcrCorrection)

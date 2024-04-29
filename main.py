@@ -19,7 +19,6 @@ import platform
 import subprocess
 import warnings
 import pycountry
-import pkg_resources
 import sys
 
 def listen_for_command():
